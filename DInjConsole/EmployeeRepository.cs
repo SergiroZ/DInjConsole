@@ -11,7 +11,7 @@ namespace DInjConsole
             new Employee {Id = 2, Name = "Employee 2"},
         };
 
-        public Employee FindById(int id)
+        public Employee FindById(int id) //реализация интерфейса IEmployeeRepository
         {
             return _data.SingleOrDefault(e => e.Id == id);
         }

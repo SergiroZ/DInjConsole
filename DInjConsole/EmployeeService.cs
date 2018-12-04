@@ -11,12 +11,12 @@ namespace DInjConsole
             _repository = repository;
         }
 
-        public void Print(int employeeId)
+        public void Print(int employeeId) //реализация интерфейса IEmployeeService
         {
             var employee = _repository.FindById(employeeId);
             Console.WriteLine(employee != null
-                ? $"Id:{employee.Id}, Name:{employee.Name}"
-                : $"Employee with Id:{employeeId} not found.");
+                ? $"Id:{employee.Id}, Name:{employee.Name};"
+                : $" Employee with Id:{employeeId} - not found!");
         }
     }
 }
