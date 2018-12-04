@@ -1,15 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autofac;
+using System;
+using IContainer = Autofac.IContainer;
 
 namespace DInjConsole
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        internal static IContainer BuildContainer
         {
+            get
+            {
+                var builder = new ContainerBuilder();
+                builder.RegisterType<EmployeeRepository>()
+                    .As<IEmployeeRepository>()
+                    .InstancePerDependency();
+                builder.RegisterType<EmployeeService>()
+                    .As<IEmployeeService>()
+                    .InstancePerDependency();
+                return builder.Build();
+            }
+        }
+
+        private static void Main(string[] args)
+        {
+            var container = BuildContainer;
+            var employeeServe = container.Resolve<IEmployeeService>();
+            employeeServe.Print(1);
+            employeeServe.Print(2);
+            employeeServe.Print(3);
+            Console.ReadLine();
         }
     }
 }
